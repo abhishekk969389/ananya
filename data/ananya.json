@@ -1,0 +1,1680 @@
+{
+  "AnanyaMakeup": {
+    "templateComponents": {
+      "template-1": {
+        "shared": {
+          "Header": "AnanyaHeader1",
+          "Footer": "AnanyaFooter1"
+        },
+        "pages": {
+          "home": {
+            "components": [
+              {
+                "key": "Banner",
+                "component": "AnanyaBanner1"
+              },
+              {
+                "key": "AboutSection",
+                "component": "AnanyaAboutSection1"
+              },
+              {
+                "key": "Services",
+                "component": "AnanyaServices1"
+              },
+              {
+                "key": "Portfolio",
+                "component": "AnanyaPortfolio1"
+              },
+              {
+                "key": "Testimonial",
+                "component": "AnanyaTestimonial1"
+              },
+              {
+                "key": "Brands",
+                "component": "AnanyaBrands1"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "sections": {
+      "Brand": {
+        "variants": {
+          "AnanyaBrand1": {
+            "name": "Ananya Makeup Artist",
+            "tagline": "Professional makeup artist",
+            "logo": "/logo.png"
+          }
+        }
+      },
+      "Header": {
+        "variants": {
+          "AnanyaHeader1": {
+            "logo": {
+              "src": "/logo-mainn.png",
+              "alt": "Ananya Makeup Artist",
+              "width": 280,
+              "height": 100
+            },
+            "navLinks": [
+              {
+                "id": "home",
+                "label": "Home",
+                "href": "/",
+                "active": true
+              },
+              {
+                "id": "about",
+                "label": "About Us",
+                "href": "/about"
+              },
+              {
+                "id": "services",
+                "label": "Services",
+                "href": "/services"
+              },
+              {
+                "id": "portfolio",
+                "label": "Portfolio",
+                "href": "/portfolio"
+              },
+              {
+                "id": "packages",
+                "label": "Packages",
+                "href": "/packages"
+              },
+              {
+                "id": "contact",
+                "label": "Contact Us",
+                "href": "/contact"
+              }
+            ],
+            "ctaButton": {
+              "label": "Book a Makeup Session",
+              "href": "/appionment"
+            }
+          }
+        }
+      },
+      "Banner": {
+        "variants": {
+          "AnanyaBanner1": {
+            "id": "home",
+            "image": {
+              "src": "/banner.png",
+              "alt": "Bridal makeup by Ananya"
+            },
+            "eyebrow": "Professional Makeup Artist",
+            "titleLine1": "Bringing Out",
+            "titleLine2": "Your Unique",
+            "scriptWord": "Beauty",
+            "description": "From everyday elegance to bridal glamour, we create looks that make you feel confident, beautiful and truly you.",
+            "primaryCta": {
+              "label": "Book Your Look",
+              "href": "/appionment"
+            },
+            "secondaryCta": {
+              "label": "Explore Portfolio",
+              "href": "/portfolio"
+            }
+          }
+        }
+      },
+      "SubBanner": {
+        "variants": {
+          "about": {
+            "id": "subbanner-about",
+            "image": {
+              "src": "/banner.png",
+              "alt": "About Us Background"
+            },
+            "title": "About Us",
+            "breadcrumbs": [
+              {
+                "label": "HOME",
+                "href": "/"
+              },
+              {
+                "label": "ABOUT US",
+                "href": "/about"
+              }
+            ]
+          },
+          "services": {
+            "id": "subbanner-services",
+            "image": {
+              "src": "/banner.png",
+              "alt": "Our Services Background"
+            },
+            "title": "Our Services",
+            "breadcrumbs": [
+              {
+                "label": "HOME",
+                "href": "/"
+              },
+              {
+                "label": "SERVICES",
+                "href": "/services"
+              }
+            ]
+          },
+          "service-detail": {
+            "id": "subbanner-service-detail",
+            "image": {
+              "src": "/banner.png",
+              "alt": "Service Detail Background"
+            },
+            "title": "Service Detail",
+            "breadcrumbs": [
+              {
+                "label": "HOME",
+                "href": "/"
+              },
+              {
+                "label": "SERVICE",
+                "href": "/services"
+              },
+              {
+                "label": "SERVICE DETAIL",
+                "href": "#"
+              }
+            ]
+          },
+          "packages": {
+            "id": "subbanner-packages",
+            "image": {
+              "src": "/banner.png",
+              "alt": "Packages Background"
+            },
+            "title": "Packages",
+            "breadcrumbs": [
+              {
+                "label": "HOME",
+                "href": "/"
+              },
+              {
+                "label": "PACKAGES",
+                "href": "/packages"
+              }
+            ]
+          },
+          "portfolio": {
+            "id": "subbanner-portfolio",
+            "image": {
+              "src": "/banner.png",
+              "alt": "Packages Background"
+            },
+            "title": "Our Portfolio",
+            "breadcrumbs": [
+              {
+                "label": "HOME",
+                "href": "/"
+              },
+              {
+                "label": "Our Portfolio",
+                "href": "/portfolio"
+              }
+            ]
+          },
+          "faq": {
+            "id": "subbanner-faq",
+            "image": {
+              "src": "/banner.png",
+              "alt": "FAQ Background"
+            },
+            "title": "Faq's",
+            "breadcrumbs": [
+              {
+                "label": "HOME",
+                "href": "/"
+              },
+              {
+                "label": "FAQ'S",
+                "href": "/faq"
+              }
+            ]
+          },
+          "contact": {
+            "id": "subbanner-contact",
+            "image": {
+              "src": "/banner.png",
+              "alt": "Contact Background"
+            },
+            "title": "Contact Us",
+            "breadcrumbs": [
+              {
+                "label": "HOME",
+                "href": "/"
+              },
+              {
+                "label": "CONTACT US",
+                "href": "/contact"
+              }
+            ]
+          },
+          "appionment": {
+            "id": "subbanner-appionment",
+            "image": {
+              "src": "/banner.png",
+              "alt": "Appointment Background"
+            },
+            "title": "Book Appointment",
+            "breadcrumbs": [
+              {
+                "label": "HOME",
+                "href": "/"
+              },
+              {
+                "label": "APPOINTMENT",
+                "href": "/appionment"
+              }
+            ]
+          }
+        }
+      },
+      "MakeupStats": {
+        "variants": {
+          "AnanyaMakeupStats1": {
+            "id": "makeup-stats",
+            "image": {
+              "src": "/img1.jpg",
+              "alt": "Makeup brushes and cosmetics"
+            },
+            "stats": [
+              {
+                "value": "500+",
+                "label": "Happy Clients",
+                "icon": "FaRegSmileBeam"
+              },
+              {
+                "value": "350+",
+                "label": "Makeup Sessions",
+                "icon": "FaRegCalendarCheck"
+              },
+              {
+                "value": "10+",
+                "label": "Years of Experience",
+                "icon": "FaUsers"
+              },
+              {
+                "value": "50+",
+                "label": "Bridal Makeups",
+                "icon": "FaAward"
+              },
+              {
+                "value": "100+",
+                "label": "Premium Brands Used",
+                "icon": "GiLipstick"
+              }
+            ]
+          }
+        }
+      },
+      "WhyChooseUs": {
+        "variants": {
+          "AnanyaWhyChooseUs1": {
+            "id": "why-choose-us",
+            "images": {
+              "large": {
+                "src": "/img2.jpg",
+                "alt": "Bride with elegant makeup and jewellery"
+              },
+              "small": {
+                "src": "/img3.jpg",
+                "alt": "Makeup artist applying blush with a brush"
+              }
+            },
+            "eyebrow": "Why Choose Us",
+            "title": "Makeup will make you ",
+            "titleHighlight": "feel confident",
+            "description": "We believe makeup is more than just beauty – it’s a way to express your personality and feel your best on every occasion. With professional skills, premium products and a client-focused approach, we ensure you look and feel confident, always.",
+            "features": [
+              {
+                "title": "Expert Skills",
+                "text": "Professional techniques for flawless and long-lasting results.",
+                "icon": "FaPaintBrush"
+              },
+              {
+                "title": "Premium Products",
+                "text": "We use high-quality, skin-friendly and trusted cosmetics.",
+                "icon": "FaGem"
+              },
+              {
+                "title": "Personalized Approach",
+                "text": "Customized looks as per your style, skin type and occasion.",
+                "icon": "FaUserFriends"
+              },
+              {
+                "title": "Flexible Scheduling",
+                "text": "Easy appointment booking to suit your convenience.",
+                "icon": "FaRegCalendarAlt"
+              }
+            ]
+          }
+        }
+      },
+      "Faq": {
+        "variants": {
+          "AnanyaFaq1": {
+            "id": "faq",
+            "eyebrow": "FAQ",
+            "title": "Frequently Asked ",
+            "titleHighlight": "Questions",
+            "description": "Find answers to some of the most common questions about our makeup services, bookings, packages and more.",
+            "leftFaqs": [
+              {
+                "question": "How early should I book my makeup?",
+                "answer": "We recommend booking at least 1-3 months in advance, especially for bridal makeup, to ensure your preferred date and time are available. For peak wedding seasons, early booking is highly recommended."
+              },
+              {
+                "question": "Do you offer bridal makeup at the venue?",
+                "answer": "Yes, we travel to your home, hotel or wedding venue. Travel charges may apply depending on the location, and we will confirm them when you book."
+              },
+              {
+                "question": "What brands and products do you use?",
+                "answer": "We use only premium, skin-friendly and trusted international brands. If you have allergies or a favourite product, let us know and we will plan your look around it."
+              },
+              {
+                "question": "How long does bridal makeup last?",
+                "answer": "With our long-lasting HD and airbrush techniques and a proper setting routine, your makeup stays fresh and flawless for 10-12 hours. We also provide a touch-up kit for the day."
+              },
+              {
+                "question": "Do you provide a trial session?",
+                "answer": "Yes, we offer a pre-bridal trial so you can finalize your look, try different styles and share feedback well before the big day. Trial charges can be adjusted in the final package."
+              },
+              {
+                "question": "What brands and products do you use?",
+                "answer": "We use only premium, skin-friendly and trusted international brands. If you have allergies or a favourite product, let us know and we will plan your look around it."
+              }
+            ],
+            "rightFaqs": [
+              {
+                "question": "Can I customize a package?",
+                "answer": "Absolutely. Every package can be tailored to your style, outfit, theme and budget. Tell us what you need and we will create a custom plan for you."
+              },
+              {
+                "question": "Do you offer makeup for engagement, reception and party events?",
+                "answer": "Yes, we offer dedicated packages for engagement, reception, pre-wedding shoots and parties, along with our bridal makeup services."
+              },
+              {
+                "question": "Is airbrush makeup suitable for everyone?",
+                "answer": "Airbrush makeup suits most skin types and gives a lightweight, flawless finish. During your consultation we will check your skin and recommend the best option for you."
+              },
+              {
+                "question": "How long does a makeup session take?",
+                "answer": "A party look usually takes about 45-60 minutes, while a full bridal look with hair styling and draping can take 2-3 hours. We plan the timing around your event schedule."
+              },
+              {
+                "question": "Do you provide hair styling and draping?",
+                "answer": "Yes, hair styling and saree / lehenga draping are included in most of our packages, or can be added to any package on request."
+              },
+              {
+                "question": "What is your cancellation or rescheduling policy?",
+                "answer": "You can reschedule your booking with advance notice, subject to availability. Cancellation terms depend on how close the date is, and the details are shared when you confirm your booking."
+              },
+              {
+                "question": "What is included in the bridal package?",
+                "answer": "Our bridal package includes HD bridal makeup, hair styling and draping, false lashes, a touch-up kit and a pre-bridal consultation."
+              }
+            ]
+          }
+        }
+      },
+      "MakeupPackages": {
+        "variants": {
+          "AnanyaMakeupPackages1": {
+            "id": "makeup-packages",
+            "eyebrow": "Our Packages",
+            "title": "Makeup ",
+            "titleHighlight": "Packages",
+            "description": "Choose from our specially curated makeup packages designed to make you look stunning for every occasion. Each package is customized to match your style, theme and requirements, ensuring a flawless and long-lasting look.",
+            "highlights": [
+              {
+                "label": "Premium Quality Products",
+                "icon": "FaGem"
+              },
+              {
+                "label": "Customized as per Your Style",
+                "icon": "FaLeaf"
+              },
+              {
+                "label": "Professional Makeup Artist",
+                "icon": "FaFemale"
+              },
+              {
+                "label": "Long-Lasting & Flawless Finish",
+                "icon": "MdOutlineVerifiedUser"
+              }
+            ],
+            "image": {
+              "src": "/img4.jpg",
+              "alt": "Bride with elegant makeup, jewellery and floral hairstyle"
+            }
+          }
+        }
+      },
+      "MakeupPricing": {
+        "variants": {
+          "AnanyaMakeupPricing1": {
+            "id": "makeup-pricing",
+            "ctaLabel": "Book Now",
+            "ctaHref": "/contact",
+            "packages": [
+              {
+                "title": "Bridal Makeup Package",
+                "price": "₹ 25,000",
+                "image": "/img5.jpg",
+                "features": [
+                  "HD Bridal Makeup",
+                  "Hair Styling & Draping",
+                  "Saree / Lehenga Draping",
+                  "False Lashes",
+                  "Makeup Touch-up Kit",
+                  "Pre Bridal Consultation"
+                ]
+              },
+              {
+                "title": "Engagement Makeup Package",
+                "price": "₹ 15,000",
+                "image": "/img6.jpg",
+                "features": [
+                  "HD Makeup",
+                  "Hair Styling",
+                  "Outfit Draping",
+                  "Premium Products",
+                  "Makeup Touch-up Kit",
+                  "Personalized Consultation"
+                ]
+              },
+              {
+                "title": "Party Makeup Package",
+                "price": "₹ 8,000",
+                "image": "/img7.jpg",
+                "features": [
+                  "Party / Event Makeup",
+                  "Hair Styling",
+                  "Makeup Touch-up Kit",
+                  "False Lashes (Optional)",
+                  "Long-Lasting Finish",
+                  "Quick Consultation"
+                ]
+              },
+              {
+                "title": "Reception Makeup Package",
+                "price": "₹ 12,000",
+                "image": "/img8.jpg",
+                "features": [
+                  "HD Reception Makeup",
+                  "Hair Styling & Draping",
+                  "Premium Makeup Products",
+                  "Makeup Touch-up Kit",
+                  "Personalized Look",
+                  "Consultation Included"
+                ]
+              },
+              {
+                "title": "Pre-Wedding Makeup Package",
+                "price": "₹ 10,000",
+                "image": "/img9.jpg",
+                "features": [
+                  "HD Makeup",
+                  "Hair Styling",
+                  "Outfit Styling Support",
+                  "Premium Products",
+                  "Long-Lasting Finish",
+                  "Makeup Touch-up Kit"
+                ]
+              },
+              {
+                "title": "Airbrush Makeup Package",
+                "price": "₹ 18,000",
+                "image": "/img10.jpg",
+                "features": [
+                  "Airbrush Makeup",
+                  "Hair Styling & Draping",
+                  "Premium International Products",
+                  "Flawless & Lightweight Finish",
+                  "Makeup Touch-up Kit",
+                  "Consultation Included"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "AppointmentSection": {
+        "variants": {
+          "AnanyaAppointment1": {
+            "id": "appointment-section",
+            "eyebrow": "Book a Appointment",
+            "title": "Schedule Your Makeup ",
+            "titleHighlight": "Appointment",
+            "description": "Fill out the form below to book your appointment. We'll get back to you shortly to confirm your preferred date and time.",
+            "services": [
+              "Bridal Makeup Package",
+              "Engagement Makeup Package",
+              "Party Makeup Package",
+              "Reception Makeup Package",
+              "Pre-Wedding Makeup Package",
+              "Airbrush Makeup Package",
+              "Custom Package"
+            ],
+            "times": [
+              "09:00 AM",
+              "10:00 AM",
+              "11:00 AM",
+              "12:00 PM",
+              "01:00 PM",
+              "02:00 PM",
+              "03:00 PM",
+              "04:00 PM",
+              "05:00 PM",
+              "06:00 PM",
+              "07:00 PM",
+              "08:00 PM"
+            ],
+            "image": {
+              "src": "/img11.jpg",
+              "alt": "Bride with elegant makeup, jewellery and floral hairstyle"
+            },
+            "form": {
+              "title": "Book Your ",
+              "titleHighlight": "Appointment",
+              "description": "Please fill in your details and we'll confirm your appointment at the earliest.",
+              "fields": {
+                "name": {
+                  "label": "Your Name",
+                  "placeholder": "Enter your name"
+                },
+                "email": {
+                  "label": "Your Email",
+                  "placeholder": "Enter your email"
+                },
+                "phone": {
+                  "label": "Phone Number",
+                  "placeholder": "Enter your phone number"
+                },
+                "date": {
+                  "label": "Preferred Date"
+                },
+                "time": {
+                  "label": "Preferred Time",
+                  "placeholder": "Select preferred time"
+                },
+                "service": {
+                  "label": "Service / Package",
+                  "placeholder": "Select a service"
+                },
+                "message": {
+                  "label": "Additional Message (Optional)",
+                  "placeholder": "Write your message here..."
+                }
+              },
+              "submitButton": "Book Appointment",
+              "successMessage": "Thank you! We'll confirm your appointment shortly."
+            },
+            "mapSrc": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224356.85923192592!2d77.23701088488971!3d28.522404036526275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5a43173357b%3A0x37ffce30c87cc03f!2sNoida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1786345160037!5m2!1sen!2sin"
+          }
+        }
+      },
+      "ContactSection": {
+        "variants": {
+          "AnanyaContact1": {
+            "id": "contact-section",
+            "eyebrow": "Contact Us",
+            "title": "Get In Touch With ",
+            "titleHighlight": "Us",
+            "description": "We'd love to hear from you! Reach out to us for any enquiries, bookings or more information about our makeup services.",
+            "contactInfo": [
+              {
+                "title": "Address",
+                "lines": [
+                  "123 Beauty Street,",
+                  "New York, USA"
+                ],
+                "icon": "FiMapPin"
+              },
+              {
+                "title": "Phone",
+                "lines": [
+                  "+1 0000000000"
+                ],
+                "icon": "FiPhone"
+              },
+              {
+                "title": "Email",
+                "lines": [
+                  "dummy@xyz.com"
+                ],
+                "icon": "FiMail"
+              },
+              {
+                "title": "Working Hours",
+                "lines": [
+                  "Mon - Sun: 9:00 AM - 8:00 PM"
+                ],
+                "icon": "FiClock"
+              }
+            ],
+            "services": [
+              "Bridal Makeup",
+              "Engagement Makeup",
+              "Reception Makeup",
+              "Pre-Wedding Makeup",
+              "Party Makeup",
+              "Airbrush Makeup",
+              "Other"
+            ],
+            "times": [
+              "09:00 AM",
+              "10:00 AM",
+              "11:00 AM",
+              "12:00 PM",
+              "01:00 PM",
+              "02:00 PM",
+              "03:00 PM",
+              "04:00 PM",
+              "05:00 PM",
+              "06:00 PM",
+              "07:00 PM",
+              "08:00 PM"
+            ],
+            "image": {
+              "src": "/img12.jpg",
+              "alt": "Makeup brushes and lipstick"
+            },
+            "mapSrc": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224356.85923192592!2d77.23701088488971!3d28.522404036526275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5a43173357b%3A0x37ffce30c87cc03f!2sNoida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1786345160037!5m2!1sen!2sin",
+            "form": {
+              "title": "Send Us a ",
+              "titleHighlight": "Message",
+              "description": "Fill out the form below and we'll get back to you as soon as possible.",
+              "fields": {
+                "name": {
+                  "label": "Your Name",
+                  "placeholder": "Enter your name"
+                },
+                "email": {
+                  "label": "Your Email",
+                  "placeholder": "Enter your email"
+                },
+                "phone": {
+                  "label": "Phone Number",
+                  "placeholder": "Enter your phone number"
+                },
+                "service": {
+                  "label": "Service Interested In",
+                  "placeholder": "Select a service"
+                },
+                "date": {
+                  "label": "Preferred Date"
+                },
+                "time": {
+                  "label": "Preferred Time",
+                  "placeholder": "Select time"
+                },
+                "message": {
+                  "label": "Message",
+                  "placeholder": "Write your message here..."
+                }
+              },
+              "submitButton": "Send Message",
+              "successMessage": "Thank you! We'll get back to you shortly."
+            }
+          }
+        }
+      },
+      "AboutSection": {
+        "variants": {
+          "AnanyaAboutSection1": {
+            "id": "about",
+            "badge": "About Me",
+            "titlePrefix": "Turning Every Occasion Into a",
+            "titleHighlight": "More Beautiful You",
+            "paragraphs": [
+              [
+                {
+                  "text": "I'm "
+                },
+                {
+                  "text": "Aarti Sharma, a professional makeup artist",
+                  "bold": true
+                },
+                {
+                  "text": " with a passion for beauty, creativity and making people feel confident. I specialize in bridal makeup, party makeup, and personalized beauty looks tailored to your style and occasion."
+                }
+              ],
+              [
+                {
+                  "text": "With attention to detail, high-quality products and the latest techniques, I aim to enhance your natural beauty and create looks that are elegant, timeless and truly you."
+                }
+              ]
+            ],
+            "mainImage": {
+              "src": "/img14.jpg",
+              "alt": "Makeup artist portrait"
+            },
+            "secondaryImage": {
+              "src": "/img16.jpg",
+              "alt": "Makeup brushes"
+            },
+            "stats": [
+              {
+                "id": "experience",
+                "value": "5+",
+                "label": "Years of Experience",
+                "icon": "PiDiamond"
+              },
+              {
+                "id": "clients",
+                "value": "300+",
+                "label": "Happy Clients",
+                "icon": "PiUsersThree"
+              },
+              {
+                "id": "looks",
+                "value": "200+",
+                "label": "Makeup Looks",
+                "icon": "PiPaintBrush"
+              },
+              {
+                "id": "events",
+                "value": "50+",
+                "label": "Events Covered",
+                "icon": "PiStar"
+              }
+            ],
+            "cta": {
+              "label": "Know More About Me",
+              "href": "/about"
+            }
+          }
+        }
+      },
+      "Services": {
+        "variants": {
+          "AnanyaServices1": {
+            "id": "services",
+            "badge": "Our Services",
+            "titlePrefix": "Beauty",
+            "titleHighlight": "Services",
+            "description": "From bridal beauty to everyday glam, I offer a range of professional makeup services to make you look and feel your absolute best for every occasion.",
+            "decorationImage": "/emoji.png",
+            "services": [
+              {
+                "id": "bridal-makeup",
+                "title": "Bridal Makeup",
+                "description": "A stunning bridal look tailored to your style and personality.",
+                "icon": "PiCrown",
+                "image": "/img16.jpg",
+                "link": "/services/bridal-makeup",
+                "linkLabel": "Read More"
+              },
+              {
+                "id": "party-makeup",
+                "title": "Party Makeup",
+                "description": "Flawless and long-lasting party makeup for special occasions.",
+                "icon": "PiSparkle",
+                "image": "/img14.jpg",
+                "link": "/services/party-makeup",
+                "linkLabel": "Read More"
+              },
+              {
+                "id": "engagement-makeup",
+                "title": "Engagement Makeup",
+                "description": "Elegant and radiant makeup for your engagement.",
+                "icon": "PiHeart",
+                "image": "/img2.jpg",
+                "link": "/services/engagement-makeup",
+                "linkLabel": "Read More"
+              },
+              {
+                "id": "pre-wedding-shoots",
+                "title": "Pre-Wedding Shoots",
+                "description": "Customised makeup for pre-wedding photoshoots.",
+                "icon": "PiCamera",
+                "image": "/img3.jpg",
+                "link": "/services/pre-wedding-shoots",
+                "linkLabel": "Read More"
+              },
+              {
+                "id": "hd-makeup",
+                "title": "HD Makeup",
+                "description": "Flawless, camera-ready look with high-definition makeup.",
+                "icon": "PiMagicWand",
+                "image": "/img4.jpg",
+                "link": "/services/hd-makeup",
+                "linkLabel": "Read More"
+              },
+              {
+                "id": "makeup-consultation",
+                "title": "Makeup Consultation",
+                "description": "Expert advice on the best makeup looks, products and skincare.",
+                "icon": "PiChatCircleDots",
+                "image": "/img5.jpg",
+                "link": "/services/makeup-consultation",
+                "linkLabel": "Read More"
+              }
+            ]
+          }
+        }
+      },
+      "Portfolio": {
+        "variants": {
+          "AnanyaPortfolio1": {
+            "id": "portfolio",
+            "badge": "Portfolio",
+            "titlePrefix": "My Makeup",
+            "titleHighlight": "Work",
+            "description": "A glimpse of my recent makeup looks — from bridal beauty to party glam. Each look is crafted with creativity, precision and a personal touch to bring out your natural charm.",
+            "decorationImage": "/emoji.png",
+            "categories": [
+              "All",
+              "Bridal",
+              "Party",
+              "Engagement",
+              "Pre-Wedding",
+              "Reception"
+            ],
+            "works": [
+              {
+                "id": "work-1",
+                "category": "Bridal",
+                "alt": "Bridal look",
+                "image": "/img6.jpg"
+              },
+              {
+                "id": "work-2",
+                "category": "Party",
+                "alt": "Party look",
+                "image": "/img7.jpg"
+              },
+              {
+                "id": "work-3",
+                "category": "Reception",
+                "alt": "Reception look",
+                "image": "/img8.jpg"
+              },
+              {
+                "id": "work-4",
+                "category": "Engagement",
+                "alt": "Engagement look",
+                "image": "/img9.jpg"
+              },
+              {
+                "id": "work-5",
+                "category": "Pre-Wedding",
+                "alt": "Pre-wedding look",
+                "image": "/img10.jpg"
+              },
+              {
+                "id": "work-6",
+                "category": "Bridal",
+                "alt": "Bridal hairstyle",
+                "image": "/img11.jpg"
+              },
+              {
+                "id": "work-7",
+                "category": "Party",
+                "alt": "Party glam",
+                "image": "/img12.jpg"
+              },
+              {
+                "id": "work-8",
+                "category": "Engagement",
+                "alt": "Makeup application",
+                "image": "/img13.jpg"
+              },
+              {
+                "id": "work-9",
+                "category": "Bridal",
+                "alt": "Bridal portrait",
+                "image": "/img14.jpg"
+              },
+              {
+                "id": "work-10",
+                "category": "Reception",
+                "alt": "Reception glam",
+                "image": "/img15.jpg"
+              },
+              {
+                "id": "work-11",
+                "category": "Pre-Wedding",
+                "alt": "Makeup brushes",
+                "image": "/img16.jpg"
+              }
+            ],
+            "cta": {
+              "label": "View More Portfolio",
+              "href": "/portfolio"
+            }
+          }
+        }
+      },
+      "Testimonial": {
+        "variants": {
+          "AnanyaTestimonial1": {
+            "id": "testimonials",
+            "badge": "Testimonials",
+            "titlePrefix": "What My Clients",
+            "titleHighlight": "Say",
+            "description": "Real stories from my beautiful clients who trusted me for their special days. Their happiness and confidence mean everything to me.",
+            "autoSlideMs": 6000,
+            "leftImage": {
+              "src": "/img4.jpg",
+              "alt": "Makeup artist client portrait"
+            },
+            "testimonials": [
+              {
+                "id": "priya-sharma",
+                "name": "Priya Sharma",
+                "role": "Bridal Makeup",
+                "rating": 5,
+                "text": "Aarti did an amazing job with my bridal makeup! It was exactly how I imagined — elegant, long-lasting and completely flawless. I felt so confident on my big day. Highly recommend her to everyone!",
+                "avatar": "/tes/t2.jpg"
+              },
+              {
+                "id": "neha-verma",
+                "name": "Neha Verma",
+                "role": "Engagement Makeup",
+                "rating": 5,
+                "text": "My engagement look was soft, radiant and so me. She listened to every detail, and the makeup stayed perfect through hours of photos and celebrations. I received so many compliments!",
+                "avatar": "/tes/t3.jpg"
+              },
+              {
+                "id": "simran-kaur",
+                "name": "Simran Kaur",
+                "role": "Party Makeup",
+                "rating": 5,
+                "text": "I booked her for my sister's wedding party and the result was stunning. Professional, punctual and so friendly. The glam look lasted all night without a single touch-up.",
+                "avatar": "/tes/t4.jpg"
+              }
+            ]
+          }
+        }
+      },
+      "Brands": {
+        "variants": {
+          "AnanyaBrands1": {
+            "id": "brands",
+            "badge": "Brands",
+            "titlePrefix": "Products",
+            "titleHighlight": "We Use",
+            "description": "We use top-quality, trusted brands to give you safe, long-lasting and flawless results.",
+            "brands": [
+              {
+                "id": "brand-1",
+                "name": "Brand 1",
+                "logo": "/brand/b1.png"
+              },
+              {
+                "id": "brand-2",
+                "name": "Brand 2",
+                "logo": "/brand/b2.png"
+              },
+              {
+                "id": "brand-3",
+                "name": "Brand 3",
+                "logo": "/brand/b3.jpg"
+              },
+              {
+                "id": "brand-4",
+                "name": "Brand 4",
+                "logo": "/brand/b4.jpg"
+              },
+              {
+                "id": "brand-5",
+                "name": "Brand 5",
+                "logo": "/brand/b5.jpg"
+              },
+              {
+                "id": "brand-6",
+                "name": "Brand 6",
+                "logo": "/brand/b6.jpg"
+              },
+              {
+                "id": "brand-7",
+                "name": "Brand 7",
+                "logo": "/brand/b7.jpg"
+              },
+              {
+                "id": "brand-8",
+                "name": "Brand 8",
+                "logo": "/brand/b8.jpg"
+              },
+              {
+                "id": "brand-9",
+                "name": "Brand 1",
+                "logo": "/brand/b1.png"
+              },
+              {
+                "id": "brand-10",
+                "name": "Brand 2",
+                "logo": "/brand/b2.png"
+              },
+              {
+                "id": "brand-11",
+                "name": "Brand 3",
+                "logo": "/brand/b3.jpg"
+              },
+              {
+                "id": "brand-12",
+                "name": "Brand 4",
+                "logo": "/brand/b4.jpg"
+              },
+              {
+                "id": "brand-13",
+                "name": "Brand 5",
+                "logo": "/brand/b5.jpg"
+              },
+              {
+                "id": "brand-14",
+                "name": "Brand 6",
+                "logo": "/brand/b6.jpg"
+              },
+              {
+                "id": "brand-15",
+                "name": "Brand 7",
+                "logo": "/brand/b7.jpg"
+              },
+              {
+                "id": "brand-16",
+                "name": "Brand 8",
+                "logo": "/brand/b8.jpg"
+              }
+            ]
+          }
+        }
+      },
+      "Footer": {
+        "variants": {
+          "AnanyaFooter1": {
+            "id": "contact",
+            "logo": {
+              "src": "/logo-mainn.png",
+              "alt": "Ananya Makeup Artist",
+              "width": 360,
+              "height": 130
+            },
+            "description": "Professional makeup artist creating beautiful, confident and timeless looks for every special occasion.",
+            "socialLinks": [
+              {
+                "platform": "facebook",
+                "label": "Facebook",
+                "url": "#"
+              },
+              {
+                "platform": "instagram",
+                "label": "Instagram",
+                "url": "#"
+              },
+              {
+                "platform": "youtube",
+                "label": "YouTube",
+                "url": "#"
+              },
+              {
+                "platform": "whatsapp",
+                "label": "WhatsApp",
+                "url": "#"
+              }
+            ],
+            "quickLinks": {
+              "title": "Quick Links",
+              "links": [
+                {
+                  "label": "Home",
+                  "href": "/"
+                },
+                {
+                  "label": "About Us",
+                  "href": "/about"
+                },
+                {
+                  "label": "Services",
+                  "href": "/services"
+                },
+                {
+                  "label": "Gallery",
+                  "href": "/portfolio"
+                },
+                {
+                  "label": "Packages",
+                  "href": "/packages"
+                },
+                {
+                  "label": "Faq's",
+                  "href": "/faq"
+                },
+                {
+                  "label": "Contact Us",
+                  "href": "/contact"
+                }
+              ]
+            },
+            "serviceLinks": {
+              "title": "Our Services",
+              "links": [
+                {
+                  "label": "Bridal Makeup",
+                  "href": "/services/bridal-makeup"
+                },
+                {
+                  "label": "Party Makeup",
+                  "href": "/services/party-makeup"
+                },
+                {
+                  "label": "Engagement Makeup",
+                  "href": "/services/engagement-makeup"
+                },
+                {
+                  "label": "Pre-Wedding Makeup",
+                  "href": "/services/pre-wedding-shoots"
+                },
+                {
+                  "label": "HD & Airbrush Makeup",
+                  "href": "/services/hd-makeup"
+                },
+                {
+                  "label": "Makeup Consultation",
+                  "href": "/services/makeup-consultation"
+                },
+                {
+                  "label": "Hair Styling",
+                  "href": "/services/party-makeup"
+                }
+              ]
+            },
+            "contactInfo": {
+              "title": "Contact Us",
+              "items": [
+                {
+                  "type": "address",
+                  "lines": [
+                    "123 Beauty Street,",
+                    "New York, USA"
+                  ]
+                },
+                {
+                  "type": "phone",
+                  "lines": [
+                    "+1 0000000000"
+                  ]
+                },
+                {
+                  "type": "email",
+                  "lines": [
+                    "dummy@xyz.com"
+                  ]
+                },
+                {
+                  "type": "hours",
+                  "lines": [
+                    "Mon - Sun: 9:00 AM - 8:00 PM"
+                  ]
+                }
+              ]
+            },
+            "bottomBar": {
+              "copyright": "© 2026 All Rights Reserved. Powered By Lestow",
+              "backToTopHref": "/",
+              "backToTopLabel": "Back to top"
+            }
+          }
+        }
+      }
+    },
+    "ServiceDetails": {
+      "bridal-makeup": {
+        "slug": "bridal-makeup",
+        "seo": {
+          "title": "Bridal Makeup Service | Ananya Makeup Artist",
+          "description": "Professional bridal makeup service tailored to your style."
+        },
+        "hero": {
+          "badge": "OUR SERVICE",
+          "titlePrefix": "Bridal ",
+          "titleHighlight": "Makeup",
+          "description": "Your wedding day is one of the most special moments of your life, and we make it even more memorable with flawless bridal makeup. Our professional bridal makeup service is designed to enhance your natural beauty while creating a long-lasting, picture-perfect look that complements your personality, outfit and wedding theme.",
+          "image": {
+            "src": "/img1.jpg",
+            "alt": "Bridal Makeup"
+          },
+          "highlights": [
+            {
+              "icon": "PiDiamond",
+              "title": "Flawless &",
+              "subtitle": "Long-Lasting Look"
+            },
+            {
+              "icon": "PiLeaf",
+              "title": "Premium &",
+              "subtitle": "Skin-Safe Products"
+            },
+            {
+              "icon": "PiUser",
+              "title": "Customized",
+              "subtitle": "Bridal Look"
+            },
+            {
+              "icon": "PiPaintBrush",
+              "title": "Professional",
+              "subtitle": "Makeup Artist"
+            }
+          ]
+        },
+        "overview": {
+          "titlePrefix": "Service ",
+          "titleHighlight": "Overview",
+          "description": "Our bridal makeup service includes complete makeover for your big day, ensuring you look stunning from every angle. We use high-quality, skin-friendly products and the latest techniques to create a look that is long-lasting, camera-ready and perfect for your wedding celebrations.",
+          "image": {
+            "src": "/img2.jpg",
+            "alt": "Service Overview"
+          },
+          "checklist": [
+            "Enhances your natural beauty",
+            "Long-lasting, smudge-proof makeup",
+            "High-quality & skin-safe products",
+            "Customized as per your outfit & theme",
+            "HD & Airbrush options available",
+            "Professional hair styling & draping",
+            "Pre-bridal consultation included"
+          ]
+        },
+        "gallery": {
+          "titlePrefix": "Bridal Makeup ",
+          "titleHighlight": "Gallery",
+          "images": [
+            "/img3.jpg",
+            "/img4.jpg",
+            "/img5.jpg",
+            "/img6.jpg",
+            "/img7.jpg",
+            "/img8.jpg",
+            "/img9.jpg",
+            "/img10.jpg",
+            "/img11.jpg",
+            "/img12.jpg",
+            "/img13.jpg",
+            "/img14.jpg"
+          ]
+        }
+      },
+      "party-makeup": {
+        "slug": "party-makeup",
+        "seo": {
+          "title": "Party Makeup Service | Ananya Makeup Artist",
+          "description": "Professional party makeup service for any occasion."
+        },
+        "hero": {
+          "badge": "OUR SERVICE",
+          "titlePrefix": "Party ",
+          "titleHighlight": "Makeup",
+          "description": "Get ready to shine at any event with our flawless party makeup services. We customize your look to perfectly match your outfit and the occasion, ensuring you look stunning and feel confident throughout the night.",
+          "image": {
+            "src": "/img15.jpg",
+            "alt": "Party Makeup"
+          },
+          "highlights": [
+            {
+              "icon": "PiDiamond",
+              "title": "Flawless &",
+              "subtitle": "Long-Lasting Look"
+            },
+            {
+              "icon": "PiSparkle",
+              "title": "Glamorous",
+              "subtitle": "Party Glow"
+            },
+            {
+              "icon": "PiUser",
+              "title": "Customized",
+              "subtitle": "Party Look"
+            },
+            {
+              "icon": "PiPaintBrush",
+              "title": "Professional",
+              "subtitle": "Makeup Artist"
+            }
+          ]
+        },
+        "overview": {
+          "titlePrefix": "Service ",
+          "titleHighlight": "Overview",
+          "description": "Our party makeup service ensures you look stunning from every angle. We use high-quality products that last all night, whether it's a corporate gala, a family gathering, or a night out with friends. From subtle elegance to bold glamour, we do it all.",
+          "image": {
+            "src": "/img16.jpg",
+            "alt": "Service Overview"
+          },
+          "checklist": [
+            "Enhances your natural features",
+            "Long-lasting, sweat-proof makeup",
+            "High-quality & safe products",
+            "Customized as per your dress",
+            "Vibrant eye makeup options",
+            "Professional hair styling available",
+            "Expert advice on party looks"
+          ]
+        },
+        "gallery": {
+          "titlePrefix": "Party Makeup ",
+          "titleHighlight": "Gallery",
+          "images": [
+            "/img1.jpg",
+            "/img2.jpg",
+            "/img3.jpg",
+            "/img4.jpg",
+            "/img5.jpg",
+            "/img6.jpg",
+            "/img7.jpg",
+            "/img8.jpg",
+            "/img9.jpg",
+            "/img10.jpg",
+            "/img11.jpg",
+            "/img12.jpg"
+          ]
+        }
+      },
+      "engagement-makeup": {
+        "slug": "engagement-makeup",
+        "seo": {
+          "title": "Engagement Makeup | Ananya Makeup Artist",
+          "description": "Beautiful engagement makeup services tailored for your special day."
+        },
+        "hero": {
+          "badge": "OUR SERVICE",
+          "titlePrefix": "Engagement ",
+          "titleHighlight": "Makeup",
+          "description": "Your engagement is the beautiful beginning of your wedding journey. Our engagement makeup service strikes the perfect balance between subtle and glamorous, making you look radiant and picture-perfect for your special ring ceremony.",
+          "image": {
+            "src": "/img13.jpg",
+            "alt": "Engagement Makeup"
+          },
+          "highlights": [
+            {
+              "icon": "PiHeart",
+              "title": "Radiant &",
+              "subtitle": "Glowing Finish"
+            },
+            {
+              "icon": "PiLeaf",
+              "title": "Premium &",
+              "subtitle": "Skin-Safe Products"
+            },
+            {
+              "icon": "PiUser",
+              "title": "Customized",
+              "subtitle": "Engagement Look"
+            },
+            {
+              "icon": "PiDiamond",
+              "title": "Professional",
+              "subtitle": "Makeup Artist"
+            }
+          ]
+        },
+        "overview": {
+          "titlePrefix": "Service ",
+          "titleHighlight": "Overview",
+          "description": "We ensure you look stunning from every angle for your engagement. Our approach focuses on creating a soft, elegant, and glowing look that perfectly complements your engagement attire and sets the tone for your upcoming wedding.",
+          "image": {
+            "src": "/img14.jpg",
+            "alt": "Service Overview"
+          },
+          "checklist": [
+            "Enhances your natural beauty",
+            "Long-lasting, smudge-proof makeup",
+            "High-quality & skin-safe products",
+            "Customized as per your outfit",
+            "Soft and radiant glam options",
+            "Professional hair styling & draping",
+            "Perfect for photography and video"
+          ]
+        },
+        "gallery": {
+          "titlePrefix": "Engagement ",
+          "titleHighlight": "Gallery",
+          "images": [
+            "/img15.jpg",
+            "/img16.jpg",
+            "/img1.jpg",
+            "/img2.jpg",
+            "/img3.jpg",
+            "/img4.jpg",
+            "/img5.jpg",
+            "/img6.jpg",
+            "/img7.jpg",
+            "/img8.jpg",
+            "/img9.jpg",
+            "/img10.jpg"
+          ]
+        }
+      },
+      "pre-wedding-shoots": {
+        "slug": "pre-wedding-shoots",
+        "seo": {
+          "title": "Pre-Wedding Shoots | Ananya Makeup Artist",
+          "description": "Camera ready makeup for your beautiful pre-wedding shoots."
+        },
+        "hero": {
+          "badge": "OUR SERVICE",
+          "titlePrefix": "Pre-Wedding ",
+          "titleHighlight": "Shoots",
+          "description": "Pre-wedding photoshoots require a versatile and camera-ready makeup approach. We provide customized makeup looks that perfectly match your shoot themes, outdoor locations, and various outfits to make your memories timeless.",
+          "image": {
+            "src": "/img11.jpg",
+            "alt": "Pre-Wedding Shoots"
+          },
+          "highlights": [
+            {
+              "icon": "PiCamera",
+              "title": "Camera-Ready",
+              "subtitle": "Flawless Finish"
+            },
+            {
+              "icon": "PiLeaf",
+              "title": "Weather-Proof",
+              "subtitle": "Outdoor Makeup"
+            },
+            {
+              "icon": "PiUser",
+              "title": "Multiple Looks",
+              "subtitle": "For Outfits"
+            },
+            {
+              "icon": "PiPaintBrush",
+              "title": "Professional",
+              "subtitle": "Makeup Artist"
+            }
+          ]
+        },
+        "overview": {
+          "titlePrefix": "Service ",
+          "titleHighlight": "Overview",
+          "description": "We ensure you look stunning in every photograph, regardless of the lighting or outdoor conditions. Our makeup is designed to withstand natural elements while keeping your face looking fresh, vibrant, and incredibly photogenic.",
+          "image": {
+            "src": "/img12.jpg",
+            "alt": "Service Overview"
+          },
+          "checklist": [
+            "Enhances your natural features for lens",
+            "Long-lasting, sweat-proof & weather-proof",
+            "High-quality & skin-safe products",
+            "Customized as per shoot location & theme",
+            "HD options available for close-ups",
+            "Professional hair styling for outdoors",
+            "Quick touch-up techniques discussed"
+          ]
+        },
+        "gallery": {
+          "titlePrefix": "Pre-Wedding ",
+          "titleHighlight": "Gallery",
+          "images": [
+            "/img13.jpg",
+            "/img14.jpg",
+            "/img15.jpg",
+            "/img16.jpg",
+            "/img1.jpg",
+            "/img2.jpg",
+            "/img3.jpg",
+            "/img4.jpg",
+            "/img5.jpg",
+            "/img6.jpg",
+            "/img7.jpg",
+            "/img8.jpg"
+          ]
+        }
+      },
+      "hd-makeup": {
+        "slug": "hd-makeup",
+        "seo": {
+          "title": "HD Makeup Service | Ananya Makeup Artist",
+          "description": "High definition makeup services for a flawless look."
+        },
+        "hero": {
+          "badge": "OUR SERVICE",
+          "titlePrefix": "HD ",
+          "titleHighlight": "Makeup",
+          "description": "High Definition (HD) Makeup is designed to look flawless, natural, and seamless even under the most powerful, high-resolution cameras. It provides a sheer but full-coverage finish that hides blemishes while keeping the skin looking like real skin.",
+          "image": {
+            "src": "/img9.jpg",
+            "alt": "HD Makeup"
+          },
+          "highlights": [
+            {
+              "icon": "PiMagicWand",
+              "title": "Flawless &",
+              "subtitle": "Natural Finish"
+            },
+            {
+              "icon": "PiCamera",
+              "title": "Perfect For",
+              "subtitle": "HD Photography"
+            },
+            {
+              "icon": "PiUser",
+              "title": "Customized",
+              "subtitle": "For Your Skin"
+            },
+            {
+              "icon": "PiDiamond",
+              "title": "Professional",
+              "subtitle": "HD Techniques"
+            }
+          ]
+        },
+        "overview": {
+          "titlePrefix": "Service ",
+          "titleHighlight": "Overview",
+          "description": "Perfect for weddings, television, and high definition photography. Our HD makeup service ensures that your makeup never looks cakey or heavy, providing a translucent, beautiful glow that stands up to intense lighting and close-up shots.",
+          "image": {
+            "src": "/img10.jpg",
+            "alt": "Service Overview"
+          },
+          "checklist": [
+            "Lightweight and breathable finish",
+            "No heavy or cakey appearance",
+            "High-quality HD-specific products",
+            "Customized as per your skin type",
+            "Perfect coverage for blemishes",
+            "Long-lasting and sweat-resistant",
+            "Ideal for 4K and 8K resolution cameras"
+          ]
+        },
+        "gallery": {
+          "titlePrefix": "HD Makeup ",
+          "titleHighlight": "Gallery",
+          "images": [
+            "/img11.jpg",
+            "/img12.jpg",
+            "/img13.jpg",
+            "/img14.jpg",
+            "/img15.jpg",
+            "/img16.jpg",
+            "/img1.jpg",
+            "/img2.jpg",
+            "/img3.jpg",
+            "/img4.jpg",
+            "/img5.jpg",
+            "/img6.jpg"
+          ]
+        }
+      },
+      "makeup-consultation": {
+        "slug": "makeup-consultation",
+        "seo": {
+          "title": "Makeup Consultation | Ananya Makeup Artist",
+          "description": "Expert advice on makeup, skincare, and beauty routines."
+        },
+        "hero": {
+          "badge": "OUR SERVICE",
+          "titlePrefix": "Makeup ",
+          "titleHighlight": "Consultation",
+          "description": "Not sure what look suits you best? Our makeup consultation service provides expert advice on makeup looks, product recommendations, and skincare tailored to your unique facial features, skin tone, and personal preferences.",
+          "image": {
+            "src": "/img7.jpg",
+            "alt": "Makeup Consultation"
+          },
+          "highlights": [
+            {
+              "icon": "PiChatCircleDots",
+              "title": "Expert",
+              "subtitle": "Beauty Advice"
+            },
+            {
+              "icon": "PiSparkle",
+              "title": "Skincare",
+              "subtitle": "Recommendations"
+            },
+            {
+              "icon": "PiUser",
+              "title": "Customized",
+              "subtitle": "Beauty Regimen"
+            },
+            {
+              "icon": "PiDiamond",
+              "title": "Professional",
+              "subtitle": "Makeup Artist"
+            }
+          ]
+        },
+        "overview": {
+          "titlePrefix": "Service ",
+          "titleHighlight": "Overview",
+          "description": "A comprehensive one-on-one session to discuss your beauty needs. Whether you are preparing for your wedding or just want to upgrade your daily look, we help you discover the techniques and products that will bring out your best self.",
+          "image": {
+            "src": "/img8.jpg",
+            "alt": "Service Overview"
+          },
+          "checklist": [
+            "In-depth skin tone analysis",
+            "Personalized product recommendations",
+            "Trial makeup looks discussed",
+            "Customized beauty and skincare routine",
+            "Advice on color palettes and shades",
+            "Q&A session for all your beauty doubts",
+            "Pre-bridal skin prep guidance"
+          ]
+        },
+        "gallery": {
+          "titlePrefix": "Consultation ",
+          "titleHighlight": "Gallery",
+          "images": [
+            "/img9.jpg",
+            "/img10.jpg",
+            "/img11.jpg",
+            "/img12.jpg",
+            "/img13.jpg",
+            "/img14.jpg",
+            "/img15.jpg",
+            "/img16.jpg",
+            "/img1.jpg",
+            "/img2.jpg",
+            "/img3.jpg",
+            "/img4.jpg"
+          ]
+        }
+      }
+    }
+  }
+}

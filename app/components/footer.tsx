@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -9,84 +11,82 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { FaClock, FaEnvelope, FaLocationDot, FaPhone } from "react-icons/fa6";
+import { motion } from "framer-motion";
+import { site } from "@/data/index";
+import type { AnanyaFooterData } from "@/data/index";
 
-const quickLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About Us", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Gallery", href: "#portfolio" },
-  { label: "Packages", href: "#services" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact Us", href: "#contact" },
-];
+const footerData: AnanyaFooterData = site.footer;
 
-const services = [
-  "Bridal Makeup",
-  "Party Makeup",
-  "Engagement Makeup",
-  "Pre-Wedding Makeup",
-  "HD & Airbrush Makeup",
-  "Saree Draping",
-  "Hair Styling",
-];
-
-const socials = [
-  { icon: FaFacebookF, label: "Facebook", href: "#" },
-  { icon: FaInstagram, label: "Instagram", href: "#" },
-  { icon: FaYoutube, label: "YouTube", href: "#" },
-  { icon: FaWhatsapp, label: "WhatsApp", href: "#" },
-];
-
-const contacts = [
-  { icon: FaLocationDot, lines: ["123 Beauty Street,", "New Delhi, India"] },
-  { icon: FaPhone, lines: ["+91 9876543210"] },
-  { icon: FaEnvelope, lines: ["info@ananyamakeupartist.com"] },
-  { icon: FaClock, lines: ["Mon - Sun: 9:00 AM - 8:00 PM"] },
-];
+const iconMap: Record<string, any> = {
+  facebook: FaFacebookF,
+  instagram: FaInstagram,
+  youtube: FaYoutube,
+  whatsapp: FaWhatsapp,
+  address: FaLocationDot,
+  phone: FaPhone,
+  email: FaEnvelope,
+  hours: FaClock,
+};
 
 const headingClass = "font-serif text-xl font-semibold text-[#f4a08f] sm:text-2xl";
 
 export default function Footer() {
+  if (!footerData) return null;
+
   return (
-    <footer id="contact" className="bg-[#17171c] text-white mt-8 sm:mt-10 md:mt-12 lg:mt-14">
+    <footer id={footerData.id} className="bg-[#17171c] text-white mt-8 sm:mt-10 md:mt-12 lg:mt-14">
       <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-14 xl:px-12">
         <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_1.25fr] lg:gap-0 lg:py-14">
           {/* Brand */}
-          <div className="lg:pr-8">
-            <Link href="#home" className="inline-block">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+            className="lg:pr-8"
+          >
+            <Link href="/" className="inline-block">
               <Image
-                src="/logo.png"
-                alt="Ananya Makeup Artist"
-                width={360}
-                height={130}
+                src={footerData.logo.src}
+                alt={footerData.logo.alt}
+                width={footerData.logo.width}
+                height={footerData.logo.height}
                 className="h-auto w-[260px] sm:w-[300px]"
               />
             </Link>
 
             <p className="mt-3 max-w-[320px] text-sm leading-relaxed text-white/90 sm:text-base">
-              Professional makeup artist creating beautiful, confident and timeless looks
-              for every special occasion.
+              {footerData.description}
             </p>
 
             <div className="mt-6 flex gap-3">
-              {socials.map(({ icon: Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="grid h-10 w-10 place-items-center rounded-full bg-[#8c3f4f] text-white transition hover:bg-[#f4a08f] hover:text-[#17171c]"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
+              {footerData.socialLinks.map(({ platform, label, url }) => {
+                const Icon = iconMap[platform];
+                return (
+                  <a
+                    key={label}
+                    href={url}
+                    aria-label={label}
+                    className="grid h-10 w-10 place-items-center rounded-full bg-[#8c3f4f] text-white transition hover:bg-[#f4a08f] hover:text-[#17171c]"
+                  >
+                    {Icon && <Icon size={16} />}
+                  </a>
+                );
+              })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick links */}
-          <div className="lg:border-l lg:border-[#c79c8d]/60 lg:pl-8">
-            <h3 className={headingClass}>Quick Links</h3>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:border-l lg:border-[#c79c8d]/60 lg:pl-8"
+          >
+            <h3 className={headingClass}>{footerData.quickLinks.title}</h3>
             <ul className="mt-5 space-y-3.5">
-              {quickLinks.map((l) => (
+              {footerData.quickLinks.links.map((l) => (
                 <li key={l.label}>
                   <Link
                     href={l.href}
@@ -98,46 +98,61 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Services */}
-          <div className="lg:border-l lg:border-[#c79c8d]/60 lg:pl-8">
-            <h3 className={headingClass}>Our Services</h3>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="lg:border-l lg:border-[#c79c8d]/60 lg:pl-8"
+          >
+            <h3 className={headingClass}>{footerData.serviceLinks.title}</h3>
             <ul className="mt-5 space-y-3.5">
-              {services.map((s) => (
-                <li key={s}>
+              {footerData.serviceLinks.links.map((s) => (
+                <li key={s.label}>
                   <Link
-                    href="#services"
+                    href={s.href}
                     className="flex items-center gap-4 text-sm text-white/90 transition hover:text-[#f4a08f] sm:text-base"
                   >
                     <FaChevronRight size={11} className="text-[#f9c4b6]" />
-                    {s}
+                    {s.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact */}
-          <div className="lg:border-l lg:border-[#c79c8d]/60 lg:pl-8">
-            <h3 className={headingClass}>Contact Us</h3>
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="lg:border-l lg:border-[#c79c8d]/60 lg:pl-8"
+          >
+            <h3 className={headingClass}>{footerData.contactInfo.title}</h3>
             <ul className="mt-5 space-y-4">
-              {contacts.map(({ icon: Icon, lines }) => (
-                <li key={lines[0]} className="flex items-center gap-4">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#f9c4b6] text-[#17171c]">
-                    <Icon size={18} />
-                  </span>
-                  <span className="break-words text-sm text-white/90 sm:text-base">
-                    {lines.map((line, i) => (
-                      <span key={i} className="block">
-                        {line}
-                      </span>
-                    ))}
-                  </span>
-                </li>
-              ))}
+              {footerData.contactInfo.items.map(({ type, lines }) => {
+                const Icon = iconMap[type];
+                return (
+                  <li key={lines[0]} className="flex items-center gap-4">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#f9c4b6] text-[#17171c]">
+                      {Icon && <Icon size={18} />}
+                    </span>
+                    <span className="break-words text-sm text-white/90 sm:text-base">
+                      {lines.map((line, i) => (
+                        <span key={i} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </span>
+                  </li>
+                );
+              })}
             </ul>
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -145,15 +160,15 @@ export default function Footer() {
       <div className="border-t border-[#c79c8d]/60">
         <div className="mx-auto flex max-w-[1320px] items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-14 xl:px-12">
           <p className="text-xs text-white/90 sm:text-sm md:text-base">
-            © 2026 Ananya Makeup Artist. All Rights Reserved.
+            {footerData.bottomBar.copyright}
           </p>
-          <a
-            href="#home"
-            aria-label="Back to top"
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#f9c4b6] text-[#17171c] transition hover:bg-[#f4a08f] sm:h-11 sm:w-11"
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            aria-label={footerData.bottomBar.backToTopLabel}
+            className="grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-full bg-[#f9c4b6] text-[#17171c] transition hover:bg-[#f4a08f] sm:h-11 sm:w-11"
           >
             <FaChevronUp size={14} />
-          </a>
+          </button>
         </div>
       </div>
     </footer>
