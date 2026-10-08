@@ -741,7 +741,7 @@
                   "bold": true
                 },
                 {
-                  "text": " with a passion for beauty, creativity and making people feel confident. I specialize in bridal makeup, party makeup, and personalized beauty looks tailored to your style and occasion."
+                  "text": " with a passion for beauty, creativity and making people feel confident. I specialize in bridal makeup, party makeup, and personalized beauty looks."
                 }
               ],
               [
@@ -804,7 +804,7 @@
               {
                 "id": "bridal-makeup",
                 "title": "Bridal Makeup",
-                "description": "A stunning bridal look tailored to your style and personality.",
+                "description": "A stunning bridal look tailored to your style and personality makeup.",
                 "icon": "PiCrown",
                 "image": "/img16.jpg",
                 "link": "/services/bridal-makeup",
@@ -839,8 +839,8 @@
               },
               {
                 "id": "hd-makeup",
-                "title": "HD Makeup",
-                "description": "Flawless, camera-ready look with high-definition makeup.",
+                "title": "HD Face Makeup",
+                "description": "Flawless, camera-ready look with high-definition makeup with glow.",
                 "icon": "PiMagicWand",
                 "image": "/img4.jpg",
                 "link": "/services/hd-makeup",
@@ -849,7 +849,7 @@
               {
                 "id": "makeup-consultation",
                 "title": "Makeup Consultation",
-                "description": "Expert advice on the best makeup looks, products and skincare.",
+                "description": "Expert advice on the best makeup looks, skincare.",
                 "icon": "PiChatCircleDots",
                 "image": "/img5.jpg",
                 "link": "/services/makeup-consultation",
