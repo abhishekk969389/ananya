@@ -1101,22 +1101,22 @@
               {
                 "platform": "facebook",
                 "label": "Facebook",
-                "url": "#"
+                "url": "https://www.facebook.com/"
               },
               {
                 "platform": "instagram",
                 "label": "Instagram",
-                "url": "#"
+                "url": "https://www.instagram.com/"
               },
               {
                 "platform": "youtube",
                 "label": "YouTube",
-                "url": "#"
+                "url": "https://www.youtube.com/"
               },
               {
                 "platform": "whatsapp",
                 "label": "WhatsApp",
-                "url": "#"
+                "url": "https://www.whatsapp.com/"
               }
             ],
             "quickLinks": {
@@ -1135,7 +1135,7 @@
                   "href": "/services"
                 },
                 {
-                  "label": "Gallery",
+                  "label": "Portfolio",
                   "href": "/portfolio"
                 },
                 {
@@ -1237,7 +1237,7 @@
           "titleHighlight": "Makeup",
           "description": "Your wedding day is one of the most special moments of your life, and we make it even more memorable with flawless bridal makeup. Our professional bridal makeup service is designed to enhance your natural beauty while creating a long-lasting, picture-perfect look that complements your personality, outfit and wedding theme.",
           "image": {
-            "src": "/img1.jpg",
+            "src": "/img3.jpg",
             "alt": "Bridal Makeup"
           },
           "highlights": [

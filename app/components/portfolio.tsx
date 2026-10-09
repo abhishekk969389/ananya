@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight, FiX, FiChevronLeft, FiChevronRight } from "react-icons/fi";
@@ -34,6 +35,17 @@ function Tile({ src, alt, onClick }: { src: string; alt: string; onClick: () => 
 export default function Portfolio({ hideButton = false }: { hideButton?: boolean } = {}) {
   const [active, setActive] = useState("All");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (lightboxIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [lightboxIndex]);
 
   if (!portfolioData) return null;
 
@@ -148,56 +160,57 @@ export default function Portfolio({ hideButton = false }: { hideButton?: boolean
     </section>
 
     {/* Lightbox Modal */}
-      {lightboxIndex !== null && (
-        <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4"
+    {lightboxIndex !== null && typeof document !== "undefined" && createPortal(
+      <div 
+        className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/95 p-4"
+        onClick={() => setLightboxIndex(null)}
+      >
+        {/* Close button */}
+        <button
           onClick={() => setLightboxIndex(null)}
+          className="absolute right-4 top-4 z-[110] grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/30 sm:right-8 sm:top-8"
         >
-          {/* Close button */}
-          <button
-            onClick={() => setLightboxIndex(null)}
-            className="absolute right-4 top-4 z-[110] grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/30 sm:right-8 sm:top-8"
-          >
-            <FiX size={24} />
-          </button>
+          <FiX size={24} />
+        </button>
 
-          {/* Prev button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxIndex((prev) => (prev! > 0 ? prev! - 1 : items.length - 1));
-            }}
-            className="absolute left-4 top-1/2 z-[110] grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/30 sm:left-8"
-          >
-            <FiChevronLeft size={28} />
-          </button>
+        {/* Prev button */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setLightboxIndex((prev) => (prev! > 0 ? prev! - 1 : items.length - 1));
+          }}
+          className="absolute left-4 top-1/2 z-[110] grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/30 sm:left-8"
+        >
+          <FiChevronLeft size={28} />
+        </button>
 
-          {/* Next button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightboxIndex((prev) => (prev! < items.length - 1 ? prev! + 1 : 0));
-            }}
-            className="absolute right-4 top-1/2 z-[110] grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/30 sm:right-8"
-          >
-            <FiChevronRight size={28} />
-          </button>
+        {/* Next button */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setLightboxIndex((prev) => (prev! < items.length - 1 ? prev! + 1 : 0));
+          }}
+          className="absolute right-4 top-1/2 z-[110] grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/30 sm:right-8"
+        >
+          <FiChevronRight size={28} />
+        </button>
 
-          {/* Image Container */}
-          <div
-            className="relative h-[85vh] w-full max-w-[1200px]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={items[lightboxIndex].image}
-              alt={items[lightboxIndex].alt}
-              fill
-              sizes="100vw"
-              className="object-contain"
-            />
-          </div>
+        {/* Image Container */}
+        <div
+          className="relative h-[85vh] w-full max-w-[1200px]"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Image
+            src={items[lightboxIndex].image}
+            alt={items[lightboxIndex].alt}
+            fill
+            sizes="100vw"
+            className="object-contain"
+          />
         </div>
-      )}
+      </div>,
+      document.body
+    )}
     </>
   );
 }

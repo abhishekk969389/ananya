@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { FiCheck, FiCheckCircle, FiChevronLeft, FiChevronRight, FiX } from "react-icons/fi";
 import { PiDiamond, PiLeaf, PiUser, PiPaintBrush, PiCrown, PiSparkle, PiHeart, PiCamera, PiMagicWand, PiChatCircleDots } from "react-icons/pi";
@@ -23,6 +24,17 @@ const IconMap: Record<string, React.ElementType> = {
 export default function ServiceDetails({ service }: { service: any }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (lightboxIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [lightboxIndex]);
 
   if (!service) return null;
 
@@ -243,9 +255,9 @@ export default function ServiceDetails({ service }: { service: any }) {
       </section>
 
       {/* Lightbox Modal */}
-      {lightboxIndex !== null && (
+      {lightboxIndex !== null && typeof document !== "undefined" && createPortal(
         <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4"
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/95 p-4"
           onClick={() => setLightboxIndex(null)}
         >
           {/* Close button */}
@@ -291,7 +303,8 @@ export default function ServiceDetails({ service }: { service: any }) {
               className="object-contain"
             />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
