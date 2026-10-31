@@ -2,13 +2,15 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-const TARGET_SIZE_BYTES = 50 * 1024; // 50 KB
+// Target strictly 39 KB (safety margin below 40 KB = 40960 bytes)
+const MAX_ALLOWED_BYTES = 40960; // 40 KB
+const TARGET_SIZE_BYTES = 39 * 1024; // 39 KB (~39936 bytes)
+
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const BACKUP_DIR = path.join(__dirname, '..', 'public_backup_original');
 
 const SUPPORTED_EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif'];
 
-// 1. Recursive file finder
 function getFiles(dir) {
   let results = [];
   if (!fs.existsSync(dir)) return results;
@@ -25,52 +27,58 @@ function getFiles(dir) {
   return results;
 }
 
-// 2. Backup creator
-function copyRecursiveSync(src, dest) {
-  if (!fs.existsSync(src)) return;
-  if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest, { recursive: true });
-  }
-  const entries = fs.readdirSync(src, { withFileTypes: true });
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-    if (entry.isDirectory()) {
-      copyRecursiveSync(srcPath, destPath);
-    } else {
-      fs.copyFileSync(srcPath, destPath);
-    }
-  }
-}
+async function compressImageFile(publicFilePath) {
+  const relPath = path.relative(PUBLIC_DIR, publicFilePath).replace(/\\/g, '/');
+  const ext = path.extname(publicFilePath).toLowerCase();
+  const currentPublicStat = fs.statSync(publicFilePath);
+  const currentPublicSize = currentPublicStat.size;
 
-// 3. Compression logic according to rules
-async function compressImage(filePath) {
-  const stat = fs.statSync(filePath);
-  const originalSize = stat.size;
-  const ext = path.extname(filePath).toLowerCase();
-
-  // Jo pehle se 50KB se choti hai, use mat chhedo
-  if (originalSize <= TARGET_SIZE_BYTES) {
+  // Rule 2: Jo images pehle se < 40KB (strictly <= MAX_ALLOWED_BYTES) hain, unhe mat chhedo
+  // (brand/b1-b8, tes/t1.jpg etc.)
+  if (currentPublicSize <= MAX_ALLOWED_BYTES) {
+    let imgDim = { width: '?', height: '?' };
+    try {
+      const meta = await sharp(publicFilePath).metadata();
+      imgDim = { width: meta.width, height: meta.height };
+    } catch (e) {}
     return {
-      before: originalSize,
-      after: originalSize,
-      status: 'Skipped (Already <50KB)'
+      before: currentPublicSize,
+      after: currentPublicSize,
+      dimensions: `${imgDim.width}x${imgDim.height}`,
+      status: 'Skipped (Already <40KB)'
     };
   }
 
-  const inputBuffer = fs.readFileSync(filePath);
-  const metadata = await sharp(inputBuffer).metadata();
+  // Rule 3: Compression hamesha public_backup_original/ ke ORIGINAL se karo,
+  // public ki already-compressed copy se nahi. Sirf banner1.jpg ke liye current public/banner1.jpg input hoga.
+  let inputPath = path.join(BACKUP_DIR, relPath);
+  if (!fs.existsSync(inputPath)) {
+    if (fs.existsSync(publicFilePath)) {
+      inputPath = publicFilePath;
+    } else {
+      throw new Error(`Original file not found for ${relPath}`);
+    }
+  }
 
-  let originalWidth = metadata.width || 1200;
-  let currentWidth = originalWidth;
+  const originalStat = fs.statSync(inputPath);
+  const originalSize = originalStat.size;
 
-  let bestBuffer = null;
-  let finalStatus = 'Compressed';
+  // Sharp instance with limitInputPixels: false for huge images (img8, img9)
+  const inputBuffer = fs.readFileSync(inputPath);
+  const baseSharp = () => sharp(inputBuffer, { limitInputPixels: false });
 
-  // Strategy loop:
-  // Step 1: Lower quality (for jpeg/webp/avif: 80 down to 40 in steps of 5)
-  // Step 2: If still > 50KB, reduce width by 10% steps, down to min 400px
-  // For PNG: compressionLevel: 9, palette: true, then scale down width if needed
+  const metadata = await baseSharp().metadata();
+  let baseWidth = metadata.width || 1200;
+
+  // Rule 4: Pehle bade images (width > 1600) ko 1600px wide par resize karo (withoutEnlargement: true)
+  if (baseWidth > 1600) {
+    baseWidth = 1600;
+  }
+
+  let currentWidth = baseWidth;
+
+  const isHeroBanner = relPath.includes('banner') || relPath.startsWith('banner');
+  const minWidth = isHeroBanner ? 800 : 480;
 
   const isPng = ext === '.png';
   const isJpeg = ext === '.jpg' || ext === '.jpeg';
@@ -78,50 +86,50 @@ async function compressImage(filePath) {
   const isAvif = ext === '.avif';
   const isGif = ext === '.gif';
 
-  // Outer loop: reduce width (10% step) if needed
+  let bestBuffer = null;
+  let finalStatus = 'Optimized (<40KB)';
+
   while (true) {
     let candidateBuffer = null;
 
     if (isPng) {
-      // First try palette: true, compressionLevel: 9
-      let pipeline = sharp(inputBuffer)
-        .rotate() // auto rotate based on EXIF before stripping
-        .withMetadata(false);
+      // PNG (banner.png, emoji.png, logo-mainn.png, brand/*.png)
+      // palette: true, quality 80 se 40, effort 10, colours 256 se kam karte jao (128, 64), phir resize.
+      // logo-mainn.png ki transparency (alpha) bachi rehni chahiye
+      let found = false;
+      const colourOptions = [256, 128, 64];
 
-      if (currentWidth < originalWidth) {
-        pipeline = pipeline.resize({ width: Math.round(currentWidth), withoutEnlargement: true });
-      }
-
-      candidateBuffer = await pipeline
-        .png({ compressionLevel: 9, palette: true, quality: 80 })
-        .toBuffer();
-
-      if (candidateBuffer.length > TARGET_SIZE_BYTES) {
-        // Try lowering quality on png palette
-        for (let q = 75; q >= 40; q -= 5) {
-          let testPipe = sharp(inputBuffer)
+      for (const colours of colourOptions) {
+        for (let q = 80; q >= 40; q -= 10) {
+          let pipeline = baseSharp()
             .rotate()
-            .withMetadata(false);
-          if (currentWidth < originalWidth) {
-            testPipe = testPipe.resize({ width: Math.round(currentWidth), withoutEnlargement: true });
-          }
-          const buf = await testPipe.png({ compressionLevel: 9, palette: true, quality: q }).toBuffer();
-          if (buf.length <= TARGET_SIZE_BYTES || q === 40) {
-            candidateBuffer = buf;
-            if (buf.length <= TARGET_SIZE_BYTES) break;
+            .resize({ width: Math.round(currentWidth), withoutEnlargement: true })
+            .png({
+              palette: true,
+              quality: q,
+              effort: 10,
+              colours: colours
+            });
+
+          const buf = await pipeline.toBuffer();
+          candidateBuffer = buf;
+
+          if (buf.length <= TARGET_SIZE_BYTES) {
+            found = true;
+            break;
           }
         }
+        if (found) break;
       }
     } else if (isJpeg || isWebp || isAvif) {
-      // Quality step from 80 down to 40
-      for (let q = 80; q >= 40; q -= 5) {
-        let pipeline = sharp(inputBuffer)
-          .rotate()
-          .withMetadata(false);
+      // JPEG: mozjpeg: true, quality 75 se 40 tak step 5 me gir ke dekho.
+      let found = false;
+      const startQuality = isJpeg ? 75 : 80;
 
-        if (currentWidth < originalWidth) {
-          pipeline = pipeline.resize({ width: Math.round(currentWidth), withoutEnlargement: true });
-        }
+      for (let q = startQuality; q >= 40; q -= 5) {
+        let pipeline = baseSharp()
+          .rotate()
+          .resize({ width: Math.round(currentWidth), withoutEnlargement: true });
 
         let buf;
         if (isJpeg) {
@@ -134,118 +142,144 @@ async function compressImage(filePath) {
 
         candidateBuffer = buf;
         if (buf.length <= TARGET_SIZE_BYTES) {
+          found = true;
           break;
         }
       }
     } else if (isGif) {
-      // GIF processing
-      let pipeline = sharp(inputBuffer, { animated: true })
-        .withMetadata(false);
-      if (currentWidth < originalWidth) {
-        pipeline = pipeline.resize({ width: Math.round(currentWidth) });
-      }
+      let pipeline = sharp(inputBuffer, { limitInputPixels: false, animated: true })
+        .resize({ width: Math.round(currentWidth), withoutEnlargement: true });
       candidateBuffer = await pipeline.gif().toBuffer();
     } else {
-      // Fallback
       candidateBuffer = inputBuffer;
     }
 
     bestBuffer = candidateBuffer;
 
-    if (bestBuffer.length <= TARGET_SIZE_BYTES) {
+    if (bestBuffer && bestBuffer.length <= TARGET_SIZE_BYTES) {
       break;
     }
 
-    // Still > 50KB: reduce width by 10%
+    // Phir bhi > 39KB ho to width 10% kam karo aur loop repeat karo.
     const nextWidth = Math.round(currentWidth * 0.9);
-    if (nextWidth < 400 || nextWidth === currentWidth) {
-      // Cannot reduce below 400px
-      finalStatus = `Warning: Best size ${(bestBuffer.length / 1024).toFixed(1)}KB at min width ${Math.max(400, currentWidth)}px`;
+    if (nextWidth < minWidth || nextWidth >= currentWidth) {
+      // If we cannot reduce width further under minWidth, check if it's already under 40960 bytes
+      if (bestBuffer && bestBuffer.length <= MAX_ALLOWED_BYTES) {
+        // Fits under 40 KB!
+        break;
+      }
+
+      // If still above 40 KB, try dropping below minWidth up to 320px if necessary to guarantee <40KB
+      if (nextWidth >= 320 && nextWidth < currentWidth) {
+        currentWidth = nextWidth;
+        continue;
+      }
+
+      finalStatus = `FAILED (>40KB): ${(bestBuffer.length / 1024).toFixed(1)}KB at ${currentWidth}px`;
       break;
     }
     currentWidth = nextWidth;
   }
 
-  // Write compressed image
-  if (bestBuffer && bestBuffer.length < originalSize) {
-    fs.writeFileSync(filePath, bestBuffer);
-    return {
-      before: originalSize,
-      after: bestBuffer.length,
-      status: bestBuffer.length <= TARGET_SIZE_BYTES ? 'Optimized (<50KB)' : finalStatus
-    };
-  } else {
-    return {
-      before: originalSize,
-      after: originalSize,
-      status: 'No reduction possible'
-    };
+  // Verify and write to public/
+  if (bestBuffer) {
+    // Only overwrite if it was produced successfully
+    if (bestBuffer.length <= MAX_ALLOWED_BYTES) {
+      fs.writeFileSync(publicFilePath, bestBuffer);
+      const finalMeta = await sharp(bestBuffer).metadata();
+      return {
+        before: originalSize,
+        after: bestBuffer.length,
+        dimensions: `${finalMeta.width}x${finalMeta.height}`,
+        status: 'Optimized (<40KB)'
+      };
+    } else {
+      // File could not be brought under 40KB
+      const finalMeta = await sharp(bestBuffer).metadata();
+      return {
+        before: originalSize,
+        after: bestBuffer.length,
+        dimensions: `${finalMeta.width}x${finalMeta.height}`,
+        status: finalStatus
+      };
+    }
   }
+
+  throw new Error(`Failed to compress ${relPath}`);
 }
 
 async function main() {
-  console.log('=== Image Compression Script ===\n');
+  console.log('=== Image Compression Script (Target < 40KB) ===\n');
 
-  // Step 2: Backup public folder
-  console.log(`[1/4] Checking backup in "${path.relative(process.cwd(), BACKUP_DIR)}"...`);
+  console.log('[1/4] Checking environment & directories...');
   if (!fs.existsSync(BACKUP_DIR)) {
-    console.log('Creating backup of public/ ...');
-    copyRecursiveSync(PUBLIC_DIR, BACKUP_DIR);
-    console.log('Backup created successfully.');
-  } else {
-    console.log('Backup already exists. Skipping backup step to prevent overwriting originals.');
+    console.error('ERROR: public_backup_original directory does not exist!');
+    process.exit(1);
   }
 
-  // Step 1: Scan files
-  console.log('\n[2/4] Scanning public/ directory...');
+  console.log('[2/4] Scanning public/ directory...');
   const allFiles = getFiles(PUBLIC_DIR);
   const imageFiles = allFiles.filter(f => SUPPORTED_EXTS.includes(path.extname(f).toLowerCase()));
+  console.log(`Found ${imageFiles.length} images in public/.\n`);
 
-  console.log(`Found ${imageFiles.length} images in total.\n`);
-
-  // Step 3 & 4: Process images
   console.log('[3/4] Compressing images...\n');
   const results = [];
+  const failedList = [];
 
   for (const imgPath of imageFiles) {
     const relPath = path.relative(PUBLIC_DIR, imgPath).replace(/\\/g, '/');
     try {
-      const res = await compressImage(imgPath);
+      const res = await compressImageFile(imgPath);
       results.push({
         file: relPath,
         beforeKB: (res.before / 1024).toFixed(1),
         afterKB: (res.after / 1024).toFixed(1),
-        status: res.status
+        dimensions: res.dimensions,
+        status: res.status,
+        rawAfter: res.after
       });
-      console.log(`✓ Processed: ${relPath} (${(res.before / 1024).toFixed(1)} KB -> ${(res.after / 1024).toFixed(1)} KB) - ${res.status}`);
+
+      if (res.status.startsWith('FAILED') || res.after > MAX_ALLOWED_BYTES) {
+        failedList.push({ file: relPath, sizeKB: (res.after / 1024).toFixed(1) });
+        console.log(`✗ FAILED: ${relPath} (${(res.before / 1024).toFixed(1)} KB -> ${(res.after / 1024).toFixed(1)} KB) - ${res.status}`);
+      } else {
+        console.log(`✓ ${relPath.padEnd(20)}: ${(res.before / 1024).toFixed(1).padStart(7)} KB -> ${(res.after / 1024).toFixed(1).padStart(5)} KB (${res.dimensions}) [${res.status}]`);
+      }
     } catch (err) {
       console.error(`✗ Error processing ${relPath}:`, err.message);
       results.push({
         file: relPath,
         beforeKB: 'Error',
         afterKB: 'Error',
-        status: `Error: ${err.message}`
+        dimensions: 'Error',
+        status: `Error: ${err.message}`,
+        rawAfter: Infinity
       });
+      failedList.push({ file: relPath, sizeKB: 'Error' });
     }
   }
 
-  // Step 5: Print Summary Table
-  console.log('\n[4/4] Final Results Table:');
-  console.log('---------------------------------------------------------------------------------------------------------');
-  console.log(`| ${'File Path'.padEnd(30)} | ${'Before'.padStart(10)} | ${'After'.padStart(10)} | ${'Status'.padEnd(35)} |`);
-  console.log('---------------------------------------------------------------------------------------------------------');
+  console.log('\n[4/4] Verification & Summary Table:');
+  console.log('-------------------------------------------------------------------------------------------------------------------');
+  console.log(`| ${'File Path'.padEnd(25)} | ${'Before'.padStart(12)} | ${'After'.padStart(10)} | ${'Dimensions'.padStart(14)} | ${'Status'.padEnd(30)} |`);
+  console.log('-------------------------------------------------------------------------------------------------------------------');
   for (const r of results) {
-    console.log(`| ${r.file.padEnd(30)} | ${(r.beforeKB + ' KB').padStart(10)} | ${(r.afterKB + ' KB').padStart(10)} | ${r.status.padEnd(35)} |`);
+    console.log(`| ${r.file.padEnd(25)} | ${(r.beforeKB + ' KB').padStart(12)} | ${(r.afterKB + ' KB').padStart(10)} | ${r.dimensions.padStart(14)} | ${r.status.padEnd(30)} |`);
   }
-  console.log('---------------------------------------------------------------------------------------------------------');
+  console.log('-------------------------------------------------------------------------------------------------------------------');
 
-  // Step 6: Verification
-  const stillAbove50KB = results.filter(r => parseFloat(r.afterKB) > 50);
-  if (stillAbove50KB.length === 0) {
-    console.log('\n SUCCESS: Saari images 50KB ke andar optimize ho gayi hain!');
+  console.log('\n--- SUMMARY ---');
+  const optimizedCount = results.filter(r => r.status.includes('Optimized')).length;
+  const skippedCount = results.filter(r => r.status.includes('Skipped')).length;
+  console.log(`Total images scanned: ${results.length}`);
+  console.log(`Compressed & Optimized: ${optimizedCount}`);
+  console.log(`Skipped (already < 40KB): ${skippedCount}`);
+
+  if (failedList.length > 0) {
+    console.log(`\n❌ FAILED Images (${failedList.length}):`);
+    failedList.forEach(f => console.log(`  - ${f.file}: ${f.sizeKB} KB`));
   } else {
-    console.log(`\n ATTENTION: ${stillAbove50KB.length} image(s) 50KB se badi hain (min width limit 400px reached):`);
-    stillAbove50KB.forEach(img => console.log(`  - ${img.file} (${img.afterKB} KB)`));
+    console.log('\n✅ ALL IMAGES ARE STRICTLY UNDER 40 KB (40960 BYTES)!');
   }
 }
 
